@@ -8,7 +8,7 @@ module Bypass
       # Start of a word
       \b
 
-      # Protocol
+      # Start of url
       https?://
 
       # Middle characters
