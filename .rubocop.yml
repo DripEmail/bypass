@@ -1,0 +1,148 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - '**/*.erb'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'script/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  NewCops: disable
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Layout/ArrayAlignment:
+  Enabled: false
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+# This is disabled because it wants parens to look like this:
+#
+#   campaign = Fabricate(:campaign,
+#     name: "Foo"
+#                       )
+# Yuck.
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Metrics/AbcSize:
+  Exclude:
+    - test/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - config/routes.rb
+    - test/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*
+
+Metrics/ParameterLists:
+  Max: 6
+
+# We're going to exclude this one on controllers because we often set instance variables that the
+# views can access by creating 'load_{variablename}' methods, like:
+#
+#   before_action :load_account
+#   def load_account
+#     @account ||= Account.find(id)
+#   end
+#
+# And in those cases we don't want to have to rename the method/variable to match
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
+  Exclude:
+    - app/controllers/**/*
+
+Style/Documentation:
+  Enabled: false
+
+# Double negation should be avoided in control flow, for instance:
+#
+#   do_thing if !!value
+#
+# Double negation is useful in other instances like coercing a
+# value to a bool within an API.
+#
+#   def foo?
+#     !!foo
+#   end
+#
+# We do the latter in many places so I'm disabling this cop until better
+# rules exist. See https://github.com/rubocop-hq/ruby-style-guide/issues/591
+Style/DoubleNegation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+# We prefer parenthesized arguments because they are easier to visually understand. That said, we
+# allow certain `DSL` and `keyword` methods to be used without parens.
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  Exclude:
+    - '**/*.jbuilder'
+    - config.ru
+    - 'config/**/*'
+    - Gemfile
+  IgnoredMethods:
+    - assert
+    - assert_empty
+    - authorize
+    - puts
+    - raise
+    - redirect_to
+    - refute
+    - render
+    - require
+    - require_relative
+    - warn
+
+# We prefer square brackets in percent literals over parenthesis
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: '[]'
+
+# Plain old rescue with implicit StandardError qualifier
+# See discussion at https://github.com/DripEmail/drip/pull/15189
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+# Prefer double quotes over single quotes.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Rails/HttpPositionalArguments:
+  Enabled: false

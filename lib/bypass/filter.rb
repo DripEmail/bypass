@@ -1,10 +1,22 @@
+# frozen_string_literal: true
+
 module Bypass
   class Filter
     attr_reader :content, :fragment
 
-    URL_PATTERN = /\bhttps?:\/\/
-      [a-zA-Z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;=%]+
-      [a-zA-Z0-9\-_~:\/\?#\[\]@!$&\*\+;=%]/x
+    URL_PATTERN = %r{
+      # Start of a word
+      \b
+
+      # Start of url
+      https?://
+
+      # Middle characters
+      [a-zA-Z0-9\-\._~:/\?#\[\]@!$&'\(\)\*\+,;=%]+
+
+      # End character
+      [a-zA-Z0-9\-_~/#\[\]@$&\*\+=%]
+    }x.freeze
 
     def initialize(content, options = {})
       @content = content.to_s.encode("UTF-8")
@@ -21,7 +33,7 @@ module Bypass
 
   private
 
-    def gsub_urls(text, &block)
+    def gsub_urls(text)
       text.gsub(URL_PATTERN) do |match|
         yield(match.to_s)
       end
