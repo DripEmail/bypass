@@ -5,8 +5,11 @@ module Bypass
     attr_reader :content, :fragment
 
     URL_PATTERN = %r{
+      # Start of a word
+      \b
+
       # Protocol
-      \bhttps?://
+      https?://
 
       # Middle characters
       [a-zA-Z0-9\-\._~:/\?#\[\]@!$&'\(\)\*\+,;=%]+
