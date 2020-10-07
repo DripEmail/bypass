@@ -19,7 +19,7 @@ module Bypass
     }x.freeze
 
     def initialize(content, options = {})
-      @content = content.to_s.encode('UTF-8')
+      @content = content.to_s.encode("UTF-8")
       @fragment = options.fetch(:fragment, true)
     end
 
@@ -31,7 +31,7 @@ module Bypass
       content
     end
 
-    private
+  private
 
     def gsub_urls(text)
       text.gsub(URL_PATTERN) do |match|
@@ -41,7 +41,7 @@ module Bypass
 
     def parse_uri(uri)
       Bypass::URI.parse(uri.to_s.strip)
-    rescue StandardError
+    rescue
       nil
     end
   end
