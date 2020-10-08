@@ -1,14 +1,11 @@
 # Bypass
 
-[![Build Status](https://travis-ci.org/djreimer/bypass.png?branch=master)](https://travis-ci.org/djreimer/bypass)
-[![Code Climate](https://codeclimate.com/github/djreimer/bypass.png)](https://codeclimate.com/github/djreimer/bypass)
+[![Build Status](https://travis-ci.org/dripemail/bypass.png?branch=master)](https://travis-ci.org/dripemail/bypass)
 
 Bypass is a Ruby gem that scans plain text or HTML documents for URLs and
 hyperlinks and allows you to mutate or replace them with ease. This library
 was originally designed for appending tracking data and shortening link
 URLs in HTML and plain text emails.
-
-Extracted from [Drip](http://www.getdrip.com/).
 
 ## Installation
 
